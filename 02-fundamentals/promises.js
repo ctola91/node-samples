@@ -52,11 +52,19 @@ let getSalary = employee => {
   });
 };
 
-getEmployee(1)
+// getEmployee(1)
+//   .then(employee => {
+//     console.log(employee);
+//     getSalary(employee)
+//     .then(salary => console.log('Salary from employee: ', salary))
+//     .catch(err => console.log(err));
+//   })
+//   .catch(err => console.log(err));
+
+getEmployee(4)
   .then(employee => {
     console.log(employee);
-    getSalary(employee)
-    .then(salary => console.log('Salary from employee: ', salary))
-    .catch(err => console.log(err));
+    return getSalary(employee);
   })
+  .then(salary => console.log("Salary from employee: ", salary))
   .catch(err => console.log(err));
