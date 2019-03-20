@@ -31,7 +31,7 @@ let getEmployee = (id, callback) => {
         callback(`Does not exist employee with id: ${id}`);
     }
     else {
-        return callback(null, employeeDB);
+        callback(null, employeeDB);
     }
 }
 
