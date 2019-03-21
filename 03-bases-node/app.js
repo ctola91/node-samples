@@ -1,6 +1,6 @@
 const { createFile } = require('./multiply/multiply');
 
-let base = 'abc';
+// let base = 'abc';
 // let data = '';
 
 // for (let i = 1; i <= 10; i++) {
@@ -11,6 +11,13 @@ let base = 'abc';
 //     if(err) throw err;
 //     console.log('The file has been sabed');
 // });
+
+// console.log(process.argv);
+
+let argv = process.argv;
+let param = argv[2];
+let base = param.split('=')[1];
+
 
 
 createFile(base)
