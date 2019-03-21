@@ -1,0 +1,17 @@
+{
+  "name": "03-bases-node",
+  "version": "1.0.0",
+  "description": "this is an app of command line interface",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cmtp",
+  "license": "ISC",
+  "dependencies": {
+    "yargs": "^13.2.2"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  }
+}
