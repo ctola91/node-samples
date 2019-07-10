@@ -1,8 +1,12 @@
 const fs = require('fs');
 
+let listTable = (base, limit = 10) => {
+    for(let i = 1; i <= limit; i++) {
+        console.log(`${base} * ${i} = ${base*i}`);
+    }
+}
 
-
-createFile = (base) => {
+createFile = (base, limit = 10 ) => {
     return new Promise((resolve, reject) => {
         let data = '';
 
@@ -11,11 +15,11 @@ createFile = (base) => {
             return;
         }
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= limit; i++) {
             data += `${base} * ${i} = ${base*i}\n`;
         }
         
-        fs.writeFile(`tables/table-${base}.txt`, data, (err) => {
+        fs.writeFile(`tables/table-${base}-al-${limit}.txt`, data, (err) => {
             if(err) reject(err);
             resolve(`table-${base}.txt`);
         });
@@ -23,5 +27,6 @@ createFile = (base) => {
 }
 
 module.exports = {
+    listTable,
     createFile
 }
