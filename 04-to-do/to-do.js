@@ -40,7 +40,7 @@ const deleteTask = description => {
   let filteredList = listToDo.filter(task => {
     return task.description !== description;
   });
-  if (filteredList.length <= 0) return false;
+  if (filteredList.length === listToDo.length) return false;
   listToDo = filteredList;
   saveDB();
   return true;
