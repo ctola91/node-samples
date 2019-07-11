@@ -1,5 +1,5 @@
 const argv = require("./config/yargs").argv;
-const {create, getTasks, update} = require("./to-do");
+const {create, getTasks, update, deleteTask } = require("./to-do");
 // const getTasks = require('./to-do');
 const colors = require('colors');
 let command = argv._[0];
@@ -22,6 +22,10 @@ switch (command) {
   case "update":
         let updated = update(argv.description, argv.completed);
         console.log(updated);
+    break;
+case 'delete':
+    let deleted = deleteTask(argv.description);
+    console.log(deleted);
     break;
   default:
     console.log("command not found");

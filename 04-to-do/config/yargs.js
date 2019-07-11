@@ -6,6 +6,13 @@ const argv = require("yargs")
         desc: 'description of the task'
       },
   })
+  .command("delete", "Delete task", {
+    description: {
+        demand: true,
+        alias: "d",
+        desc: 'Delete task by description'
+      },
+  })
   .command("list", "list tasks", {
   })
   .command("update", "update task", {
