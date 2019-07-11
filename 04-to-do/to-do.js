@@ -18,8 +18,12 @@ const loadDB = () => {
   }
 };
 
-const getTasks = () => {
+const getTasks = (completed = true) => {
   loadDB();
+  if (completed) {
+      let filteredList = listToDo.filter(task => task.completed === true);
+      return filteredList;
+  }
   return listToDo;
 };
 
@@ -27,7 +31,7 @@ const update = (description, completed = true) => {
   loadDB();
   let index = listToDo.findIndex(task => task.description === description);
   if (index >= 0) {
-    listToDo[index].completed = completed;
+    listToDo[index].completed = Boolean(completed);
     saveDB();
     return true;
   } else {

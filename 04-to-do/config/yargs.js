@@ -6,7 +6,7 @@ const description = {
 
 const completed = {
   alias: "c",
-  default: true,
+  default: false,
   desc: "change task to completed or pending"
 };
 
@@ -17,7 +17,9 @@ const argv = require("yargs")
   .command("delete", "Delete task", {
     description
   })
-  .command("list", "list tasks", {})
+  .command("list", "list tasks", {
+      completed
+  })
   .command("update", "update task", {
     description,
     completed
