@@ -1,17 +1,27 @@
 const argv = require("./config/yargs").argv;
-const create = require("./to-do").create;
-
+const {create, getTasks, update} = require("./to-do");
+// const getTasks = require('./to-do');
+const colors = require('colors');
 let command = argv._[0];
-
-console.log(argv);
 
 switch (command) {
   case "create":
     let task = create(argv.description);
     console.log(task);
     break;
+  case "list":
+    let tasks = getTasks();
+    for (let task of tasks) {
+        console.log('========== To Do =========='.green);
+        console.log(task.description);
+        console.log('Status: ', task.completed);
+        console.log('==========================='.green);
+
+    }
+    break;
   case "update":
-    console.log("update");
+        let updated = update(argv.description, argv.completed);
+        console.log(updated);
     break;
   default:
     console.log("command not found");

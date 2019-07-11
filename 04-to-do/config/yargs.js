@@ -6,6 +6,8 @@ const argv = require("yargs")
         desc: 'description of the task'
       },
   })
+  .command("list", "list tasks", {
+  })
   .command("update", "update task", {
     description: {
       demand: true,
