@@ -37,9 +37,7 @@ const update = (description, completed = true) => {
 
 const deleteTask = description => {
   loadDB();
-  let filteredList = listToDo.filter(task => {
-    return task.description !== description;
-  });
+  let filteredList = listToDo.filter(task => task.description !== description);
   if (filteredList.length === listToDo.length) return false;
   listToDo = filteredList;
   saveDB();
