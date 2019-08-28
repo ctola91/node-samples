@@ -1,17 +1,26 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require("express");
+const hbs = require("hbs");
 
-app.use(express.static(__dirname + '/public'));
+const app = express();
+const port = 3000;
 
-app.set('view engine', 'hbs');
+app.use(express.static(__dirname + "/public"));
 
-app.get('/', (req, res) => {
+hbs.registerPartials(__dirname + "/views/partials");
 
-    res.render('home', {
-        name: 'Christian',
-        year: new Date().getFullYear()
-    });
+app.set("view engine", "hbs");
+
+app.get("/", (req, res) => {
+  res.render("home", {
+    name: "Christian",
+    year: new Date().getFullYear()
+  });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.get("/about", (req, res) => {
+  res.render("about", {
+    year: new Date().getFullYear()
+  });
+});
+
+app.listen(port, () => console.log(`Example app listening on port ${port}!`));
