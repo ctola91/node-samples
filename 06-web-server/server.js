@@ -4,14 +4,14 @@ const port = 3000
 
 app.use(express.static(__dirname + '/public'));
 
-// app.get('/', (req, res) => {
-//     let result = {
-//         name: 'Chris',
-//         age: '28',
-//         url: req.url
-//     }
+app.set('view engine', 'hbs');
 
-//     res.send(result);
-// });
+app.get('/', (req, res) => {
+
+    res.render('home', {
+        name: 'Christian',
+        year: new Date().getFullYear()
+    });
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
