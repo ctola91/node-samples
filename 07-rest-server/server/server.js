@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+require('./config/config');
+
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -35,6 +37,6 @@ app.delete('/user/:id', (req, res) => {
     res.json('delete User');
 });
 
-app.listen(3000, () => {
-    console.log('Listen port: ', 3000);
+app.listen(process.env.PORT, () => {
+    console.log('Listen port: ', process.env.PORT);
 })
