@@ -16,6 +16,12 @@ app.get('/user', (req, res) => {
 app.post('/user', (req, res) => {
     let body = req.body;
     
+    if (body.name === undefined) {
+        res.status(400).json({
+            ok: false,
+            message: 'The name is required',
+        })
+    }
     res.json({person: body});
 });
 
