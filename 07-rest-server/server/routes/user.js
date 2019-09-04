@@ -1,7 +1,6 @@
 const express = require("express");
 const User = require("../models/user");
-const bcrypt = require('bcrypt');
-
+const bcrypt = require("bcrypt");
 
 const app = express();
 
@@ -36,8 +35,21 @@ app.post("/user", (req, res) => {
 
 app.put("/user/:id", (req, res) => {
   let id = req.params.id;
+  let body = req;
 
-  res.json({ id });
+  User.findByIdAndUpdate(id, body, { new: true }, (err, userDB) => {
+    if (err) {
+        return res.status(400).json({
+            ok: false,
+            err
+        });
+    }
+    res.json({
+        ok: true,
+        user: userDB
+    });
+  })
+
 });
 
 app.delete("/user/:id", (req, res) => {
