@@ -2,7 +2,7 @@ const express = require("express");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const _ = require("lodash");
-const { verifyToken } = require('../middlewares/auth')
+const { verifyToken, verifyRole } = require('../middlewares/auth')
 
 const app = express();
 
@@ -37,7 +37,7 @@ app.get("/user", verifyToken ,(req, res) => {
     });
 });
 
-app.post("/user", verifyToken, (req, res) => {
+app.post("/user", [verifyToken, verifyRole], (req, res) => {
   let body = req.body;
 
   let user = new User({
@@ -62,7 +62,7 @@ app.post("/user", verifyToken, (req, res) => {
   });
 });
 
-app.put("/user/:id", verifyToken, (req, res) => {
+app.put("/user/:id", [verifyToken, verifyRole], (req, res) => {
   let id = req.params.id;
   let body = _.pick(req.body, ["name", "email", "img", "role", "state"]);
 
@@ -85,7 +85,7 @@ app.put("/user/:id", verifyToken, (req, res) => {
   );
 });
 
-app.delete("/user/:id", verifyToken, (req, res) => {
+app.delete("/user/:id", [verifyToken, verifyRole], (req, res) => {
   let id = req.params.id;
 
   let deleteState = {

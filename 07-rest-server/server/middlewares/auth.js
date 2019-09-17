@@ -10,7 +10,7 @@ let verifyToken = (req, res, next) => {
       return res.status(401).json({
         ok: false,
         err: {
-            message: 'Token invalid.'
+          message: "Token invalid."
         }
       });
     }
@@ -20,6 +20,22 @@ let verifyToken = (req, res, next) => {
   });
 };
 
+let verifyRole = (req, res, next) => {
+  let user = req.user;
+
+  if (user.role !== "ADMIN_ROLE") {
+    return res.status(401).json({
+      ok: false,
+      err: {
+        message: "need admin role"
+      }
+    });
+  }
+
+  next();
+};
+
 module.exports = {
-  verifyToken
+  verifyToken,
+  verifyRole
 };
