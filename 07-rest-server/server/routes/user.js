@@ -11,10 +11,10 @@ app.get("/user", (req, res) => {
   let limit = req.query.limit || 5;
   limit = Number(limit);
 
-  User.find({}, 'name email role state google img')
-  .skip(from)
-  .limit(limit)
-    .exec( (err, users) => {
+  User.find({}, "name email role state google img")
+    .skip(from)
+    .limit(limit)
+    .exec((err, users) => {
       if (err) {
         return res.status(400).json({
           ok: false,
@@ -23,14 +23,13 @@ app.get("/user", (req, res) => {
       }
 
       User.count({}, (err, count) => {
-
         res.json({
           ok: true,
           users,
           total: count
         });
       });
-    })
+    });
 });
 
 app.post("/user", (req, res) => {
@@ -82,7 +81,29 @@ app.put("/user/:id", (req, res) => {
 });
 
 app.delete("/user/:id", (req, res) => {
-  res.json("delete User");
+  let id = req.params.id;
+
+  User.findByIdAndRemove(id, (err, userDeleted) => {
+    if (err) {
+      return res.status(400).json({
+        ok: false,
+        message: err
+      });
+    }
+
+    if (!userDeleted) {
+      return res.status(400).json({
+        ok: false,
+        err: {
+          message: 'User not Found'
+        }
+      })
+    }
+    res.json({
+      ok: true,
+      user: userDeleted
+    });
+  });
 });
 
 module.exports = app;
