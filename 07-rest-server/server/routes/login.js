@@ -6,8 +6,38 @@ const User = require("../models/user");
 const app = express();
 
 app.post("/login", (req, res) => {
-  res.json({
-    ok: true
+  let body = req.body;
+
+  User.findOne({ email: body.email }, (err, userDB) => {
+    if (err) {
+      return res.status(500).json({
+        ok: false,
+        err
+      });
+    }
+    if (!userDB) {
+      return res.status(401).json({
+        ok: false,
+        err: {
+          message: "User or password incorrect"
+        }
+      });
+    }
+
+    if (!bcrypt.compareSync(body.password, userDB.password)) {
+      return res.status(401).json({
+        ok: false,
+        err: {
+          message: "User or password incorrect"
+        }
+      });
+    }
+
+    res.json({
+      ok: true,
+      user: userDB,
+      token: "123"
+    });
   });
 });
 
